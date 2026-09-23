@@ -14,7 +14,7 @@
 #' @importFrom dplyr mutate select if_else filter left_join select
 #' @importFrom purrr pmap_dfr map imap imap_dfr map2
 #' @importFrom tibble tibble tribble as_tibble
-#' @importFrom ggplot2 ggplot geom_col aes geom_point facet_wrap geom_errorbar theme scale_color_manual scale_fill_manual scale_fill_discrete labs scale_y_log10
+#' @importFrom ggplot2 ggplot geom_col aes geom_point facet_wrap geom_errorbar theme scale_color_manual scale_fill_manual scale_fill_discrete labs scale_y_log10 coord_flip theme element_text
 #' @importFrom formula.tools lhs
 #' @importFrom plotly ggplotly plotlyOutput renderPlotly
 mod_intervalos_ui <- function(id) {
@@ -399,7 +399,7 @@ mod_intervalos_server <- function(id){
         p <- p + scale_y_log10()
       }
 
-      p <- p + labs(x = "Soil sample", y = "€/Ha")
+      p <- p + labs(x = "", y = "€/Ha") + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
       ggplotly(p)
 
@@ -449,7 +449,7 @@ mod_intervalos_server <- function(id){
         p <- p + scale_y_log10()
       }
 
-      p <- p + labs(x = "Soil sample", y = "€/Ha")
+      p <- p + labs(x = "", y = "€/Ha") + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
       ggplotly(p)
 

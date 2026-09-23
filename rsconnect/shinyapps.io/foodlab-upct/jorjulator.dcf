@@ -1,0 +1,12 @@
+name: jorjulator
+title: jorjulator
+username: foodlab-upct
+account: foodlab-upct
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 17990214
+bundleId:
+url: https://foodlab-upct.shinyapps.io/jorjulator/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

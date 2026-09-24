@@ -11,7 +11,7 @@
 #' @importFrom readxl read_excel
 #' @importFrom rlang set_names
 #' @importFrom tidyr drop_na pivot_longer pivot_wider separate
-#' @importFrom dplyr mutate select if_else filter left_join select
+#' @importFrom dplyr mutate select if_else filter left_join select row_number
 #' @importFrom purrr pmap_dfr map imap imap_dfr map2
 #' @importFrom tibble tibble tribble as_tibble
 #' @importFrom ggplot2 ggplot geom_col aes geom_point facet_wrap geom_errorbar theme scale_color_manual scale_fill_manual scale_fill_discrete labs scale_y_log10 coord_flip theme element_text
@@ -205,6 +205,18 @@ mod_intervalos_server <- function(id){
       }
 
       d <- set_names(d, default_names)
+
+      #- Fill in empty values
+
+      d <- d |>
+        mutate(i = row_number()) |>
+        mutate(sample = if_else(is.na(sample),
+                                paste0("Case #, ", i),
+                                sample
+                                )) |>
+        select(-i) |>
+        mutate(across(default_names[-(1:2)], as.numeric)) |>
+        mutate(across(default_names[-(1:2)], ~ if_else(is.na(.), 0, .)))
 
       #- Format of the columns
 
